@@ -1,7 +1,7 @@
 import { Text } from "react-native";
 
-const Dashboard = ({ data }) => {
-  return <Text>Dashboard: {data.email}</Text>;
+const Dashboard = () => {
+  return <Text>Dashboard</Text>;
 };
 
 export default Dashboard;

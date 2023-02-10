@@ -1,10 +1,10 @@
 import * as Google from "expo-auth-session/providers/google";
 import * as WebBrowser from "expo-web-browser";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import GPTButton from "../components/Button";
+import { getValueFor, save } from "../helpers/Store";
 import Dashboard from "./Dashboard";
-import * as SecureStore from "expo-secure-store";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -13,6 +13,7 @@ const Auth = (props) => {
 
   const [accessToken, setAccessToken] = useState(null);
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
   const [request, response, promptAsync] = Google.useAuthRequest(
     {
       expoClientId: expoClientId,
@@ -30,6 +31,17 @@ const Auth = (props) => {
     }
   }, [response, accessToken]);
 
+  const tokenStored = async () => {
+    const result = await getValueFor("storedAccessToken");
+
+    return result;
+  };
+
+  (async () => {
+    const userToken = await tokenStored();
+    setToken(userToken);
+  })();
+
   async function getUserInfo() {
     let response = await fetch(googleEndpoint, {
       headers: {
@@ -41,24 +53,10 @@ const Auth = (props) => {
     setUser(userInfo);
   }
 
-  async function save(key, value) {
-    await SecureStore.setItemAsync(key, value);
-  }
-
-  async function getValueFor(key) {
-    let result = await SecureStore.getItemAsync(key);
-    if (result) {
-      return true;
-    }
-    return false;
-  }
-
-  console.log(getValueFor("storedAccessToken"));
-
   return (
     <View style={styles.container}>
-      {user && <Dashboard data={user} />}
-      {user === null && (
+      {token === true && <Dashboard />}
+      {token === null && (
         <>
           <Image
             style={styles.logo}

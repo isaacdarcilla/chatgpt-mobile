@@ -2,4 +2,5 @@
 
 To-do
 
-* Persistent authentication
+* <s>Persistent authentication</s>
+* Add start screen 

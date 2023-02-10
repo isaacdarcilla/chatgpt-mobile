@@ -5,14 +5,14 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import GPTButton from "../components/Button";
 import { getValueFor, save } from "../helpers/Store";
 import Dashboard from "./Dashboard";
-import { REACT_APP_EXPO_CLIENT_ID, REACT_APP_GOOGLE_ENDPOINT } from "@env";
+import { REACT_APP_EXPO_CLIENT_ID } from "@env";
 
 WebBrowser.maybeCompleteAuthSession();
 
 const Auth = () => {
   const [accessToken, setAccessToken] = useState(null);
   const [token, setToken] = useState(null);
-  const [response, promptAsync] = Google.useAuthRequest(
+  const [request, response, promptAsync] = Google.useAuthRequest(
     {
       expoClientId: REACT_APP_EXPO_CLIENT_ID,
       webClientId: REACT_APP_EXPO_CLIENT_ID,
@@ -25,7 +25,7 @@ const Auth = () => {
   useEffect(() => {
     if (response?.type === "success") {
       setAccessToken(response.authentication.accessToken);
-      accessToken && getUserInfo();
+      accessToken && save("storedAccessToken", accessToken);
     }
   }, [response, accessToken]);
 
@@ -39,16 +39,6 @@ const Auth = () => {
     const userToken = await tokenStored();
     setToken(userToken);
   })();
-
-  async function getUserInfo() {
-    let response = await fetch(REACT_APP_GOOGLE_ENDPOINT, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    const userInfo = await response.json();
-    save("storedAccessToken", accessToken);
-  }
 
   return (
     <View style={styles.container}>
@@ -66,7 +56,7 @@ const Auth = () => {
           <View style={styles.buttonContainer}>
             <GPTButton title="Log in" onPress={() => promptAsync()} />
             <View style={styles.space} />
-            <GPTButton title="Sign up" />
+            <GPTButton title="Sign up" onPress={() => promptAsync()} />
           </View>
         </>
       )}

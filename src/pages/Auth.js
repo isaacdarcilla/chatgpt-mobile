@@ -1,23 +1,21 @@
 import * as Google from "expo-auth-session/providers/google";
 import * as WebBrowser from "expo-web-browser";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import GPTButton from "../components/Button";
 import { getValueFor, save } from "../helpers/Store";
 import Dashboard from "./Dashboard";
+import { REACT_APP_EXPO_CLIENT_ID, REACT_APP_GOOGLE_ENDPOINT } from "@env";
 
 WebBrowser.maybeCompleteAuthSession();
 
-const Auth = (props) => {
-  const { expoClientId, googleEndpoint } = props;
-
+const Auth = () => {
   const [accessToken, setAccessToken] = useState(null);
-  const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-  const [request, response, promptAsync] = Google.useAuthRequest(
+  const [response, promptAsync] = Google.useAuthRequest(
     {
-      expoClientId: expoClientId,
-      webClientId: expoClientId,
+      expoClientId: REACT_APP_EXPO_CLIENT_ID,
+      webClientId: REACT_APP_EXPO_CLIENT_ID,
     },
     {
       useProxy: true,
@@ -43,14 +41,13 @@ const Auth = (props) => {
   })();
 
   async function getUserInfo() {
-    let response = await fetch(googleEndpoint, {
+    let response = await fetch(REACT_APP_GOOGLE_ENDPOINT, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
     const userInfo = await response.json();
     save("storedAccessToken", accessToken);
-    setUser(userInfo);
   }
 
   return (

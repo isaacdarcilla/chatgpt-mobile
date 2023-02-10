@@ -41,10 +41,10 @@ const Auth = () => {
   })();
 
   return (
-    <View style={styles.container}>
+    <>
       {token === true && <Dashboard />}
       {token === null && (
-        <>
+        <View style={styles.container}>
           <Image
             style={styles.logo}
             source={require("../../assets/icon.png")}
@@ -58,9 +58,9 @@ const Auth = () => {
             <View style={styles.space} />
             <GPTButton title="Sign up" onPress={() => promptAsync()} />
           </View>
-        </>
+        </View>
       )}
-    </View>
+    </>
   );
 };
 

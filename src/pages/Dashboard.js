@@ -1,10 +1,19 @@
-import { View, StyleSheet, Text, Button, ScrollView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Platform,
+  ScrollView,
+  KeyboardAvoidingView,
+} from "react-native";
 import CardHeader from "../components/CardHeader";
 import NavBar from "../components/NavBar";
 import SunIcon from "../../assets/icons/sun.svg";
 import ZapIcon from "../../assets/icons/zap.svg";
 import AlertTriangleIcon from "../../assets/icons/alert-triangle.svg";
 import Card from "../components/Card";
+import BottomBar from "../components/BottomBar";
+import Input from "../components/Input";
 const Dashboard = () => {
   return (
     <>
@@ -36,7 +45,15 @@ const Dashboard = () => {
           <Card title="May occasionally generate incorrect information" />
           <Card title="May occasionally produce harmful instructions or biased content" />
           <Card title="Limited knowledge of world and events after 2021" />
+          <View style={{ paddingBottom: 150 }} />
         </ScrollView>
+        <BottomBar>
+          <Input />
+          <Text style={styles.textStyle}>
+            Free Research Preview. Our goal is to make AI systems more natural
+            and safe to interact with. Your feedback will help us improve.
+          </Text>
+        </BottomBar>
       </View>
     </>
   );
@@ -57,6 +74,15 @@ const styles = StyleSheet.create({
   spacing: {
     margin: 15,
   },
+  textStyle: {
+    color: "#fff",
+    fontSize: 12,
+    paddingRight: 15,
+    paddingLeft: 15,
+    paddingBottom: 20,
+    paddingTop: 10,
+  },
+  inputStyle: {},
 });
 
 export default Dashboard;

@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import SendIcon from "../../assets/icons/send.svg";
 
-const Input = () => {
+const GPTInput = () => {
   return (
     <>
       <View style={styles.container}>
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Input;
+export default GPTInput;

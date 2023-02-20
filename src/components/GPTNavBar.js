@@ -2,7 +2,7 @@ import PlusIcon from "../../assets/icons/plus.svg";
 import MenuIcon from "../../assets/icons/menu.svg";
 import { Text, View, StyleSheet, Dimensions, Pressable } from "react-native";
 
-const NavBar = () => {
+const GPTNavBar = () => {
   return (
     <>
       <View style={[styles.appBarShape, styles.appBarZIndex]}>
@@ -54,4 +54,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NavBar;
+export default GPTNavBar;

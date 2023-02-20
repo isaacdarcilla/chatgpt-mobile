@@ -2,7 +2,7 @@ import * as Google from "expo-auth-session/providers/google";
 import * as WebBrowser from "expo-web-browser";
 import { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import GPTButton from "../components/Button";
+import GPTButton from "../components/GPTButton";
 import { getValueFor, save } from "../helpers/Store";
 import Dashboard from "./Dashboard";
 import { REACT_APP_EXPO_CLIENT_ID } from "@env";

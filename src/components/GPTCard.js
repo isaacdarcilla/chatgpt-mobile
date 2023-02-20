@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
-const Card = (props) => {
+const GPTCard = (props) => {
   const { title } = props;
   return (
     <>
@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Card;
+export default GPTCard;

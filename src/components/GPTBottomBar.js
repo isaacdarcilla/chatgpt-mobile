@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 
-const BottomBar = ({ children }) => {
+const GPTBottomBar = ({ children }) => {
   return <View style={styles.bottomBar}>{children}</View>;
 };
 
@@ -20,4 +20,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BottomBar;
+export default GPTBottomBar;

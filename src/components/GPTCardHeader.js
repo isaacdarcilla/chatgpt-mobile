@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import SunIcon from "../../assets/icons/sun.svg";
 
-const CardHeader = (props) => {
+const GPTCardHeader = (props) => {
   const { iconComponent = <SunIcon color="white" />, title = "Examples" } =
     props;
   return (
@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CardHeader;
+export default GPTCardHeader;
